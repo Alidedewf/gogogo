@@ -1,21 +1,16 @@
-# Этап сборки
-FROM golang:1.22-alpine AS build
+# Используем базовый golang с автоматическим обновлением тулчейна
+FROM golang:1.22-bullseye
+
+ENV GOTOOLCHAIN=auto
 
 WORKDIR /app
-COPY go.mod go.sum ./
+
+COPY go.mod ./
 RUN go mod download
 
 COPY . .
+
 RUN go build -o main .
 
-# Этап запуска
-FROM alpine:latest
-
-WORKDIR /app
-COPY --from=build /app/main .
-
-EXPOSE 8000
-
-ENV PORT=8000
-
+EXPOSE 8080
 CMD ["./main"]
