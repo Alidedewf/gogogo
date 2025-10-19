@@ -13,7 +13,6 @@ FROM alpine:latest
 
 WORKDIR /app
 COPY --from=build /app/main .
-COPY index.html .
 
 EXPOSE 8000
 
