@@ -8,7 +8,6 @@ import (
 	"io"
 	"log"
 	"net/http"
-	"os"
 )
 
 // Структура для декодирования запроса от фронтенда
@@ -56,7 +55,7 @@ func handleChat(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Получен промпт: %s", req.Prompt)
 
 	// 2. Получаем API ключ из окружения
-	apiKey := os.Getenv("LITELLM_API_KEY")
+	apiKey := "sk-roG3OusRr0TLCHAADks6lw"
 	if apiKey == "" {
 		log.Println("Внимание: переменная окружения LITELLM_API_KEY не установлена.")
 		http.Error(w, "API key is not configured on the server", http.StatusInternalServerError)
